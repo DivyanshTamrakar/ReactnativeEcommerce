@@ -1,1 +1,1 @@
-export const ALLPRODUCTURL = 'https://api.escuelajs.co/api/v1/products'
+export const ALLPRODUCTURL = "https://api.escuelajs.co/api/v1/products";

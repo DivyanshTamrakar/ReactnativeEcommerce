@@ -2,6 +2,7 @@ import { Link } from "expo-router";
 import React, { FC } from "react";
 import { Image, StyleSheet, Text, View } from "react-native";
 import { ProductItemInterface } from "../commonTypes";
+import { Colors } from "../constants/Colors";
 
 type Props = {
   product: ProductItemInterface;
@@ -11,7 +12,10 @@ type Props = {
 
 const ProductItem: FC<Props> = ({ product, onPress, id }) => {
   return (
-    <Link href="/about" style={styles.container}>
+    <Link
+      href={{ pathname: "/about", params: { id } }}
+      style={styles.container}
+    >
       {/* Product Image */}
       <Image
         source={{
@@ -37,8 +41,8 @@ const styles = StyleSheet.create({
   container: {
     flex: 1, // Ensure it expands properly in the row
     backgroundColor: "#fff",
-    borderRadius: 10,
-    padding: 10,
+    borderBottomLeftRadius: 5,
+    borderBottomRightRadius: 5,
     margin: 5,
     alignItems: "center",
     shadowColor: "#000",
@@ -49,7 +53,22 @@ const styles = StyleSheet.create({
   image: {
     width: "100%", // Make sure image scales properly
     height: 120,
-    borderRadius: 10,
+    objectFit: "cover",
+  },
+  details: {
+    padding: 10,
+  },
+  category: {
+    color: Colors.lightGrey2,
+    fontSize: 10,
+  },
+  title: {
+    color: Colors.lightGrey2,
+    fontSize: 12,
+  },
+  price: {
+    color: Colors.black,
+    fontSize: 13,
   },
 });
 

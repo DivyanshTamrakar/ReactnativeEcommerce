@@ -1,19 +1,16 @@
+import { useEffect, useState } from "react";
 import {
-  Text,
-  View,
-  StyleSheet,
-  StatusBar,
-  FlatList,
   ActivityIndicator,
+  FlatList,
   SafeAreaView,
+  StyleSheet,
+  View,
 } from "react-native";
-import { Link } from "expo-router";
-import useGetAllProducts from "./hooks/getProductsData";
+import { ProductItemInterface } from "./commonTypes";
 import SearchBar from "./components/SearchBarComponent";
 import ProductItem from "./components/productItem";
-import { useEffect, useState } from "react";
-import { Pressable } from "react-native-gesture-handler";
-import { ProductItemInterface } from "./commonTypes";
+import useGetAllProducts from "./hooks/getProductsData";
+import { Colors } from "./constants/Colors";
 
 export default function Index() {
   const { allProducts } = useGetAllProducts();
@@ -49,13 +46,8 @@ export default function Index() {
   return (
     <SafeAreaView style={styles.container}>
       {/* <StatusBar backgroundColor="#c3c3c3" barStyle="dark-content" /> */}
-      <View>
-        <SearchBar
-          value={searchText}
-          onChangeText={handleChange}
-          placeholder={"Enter Product Name..."}
-        />
-      </View>
+
+      <SearchBar value={searchText} onChangeText={handleChange} />
 
       {filteredData.length > 0 ? (
         <FlatList
@@ -65,6 +57,7 @@ export default function Index() {
           keyExtractor={(item, index) => index.toString()}
           numColumns={2} // Ensures two items per row
           initialNumToRender={10}
+          columnWrapperStyle={{ gap: 10, marginBottom: 10 }} // Row gap
         />
       ) : (
         <ActivityIndicator
@@ -78,14 +71,15 @@ export default function Index() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#c3c3c3",
+    backgroundColor: Colors.white,
+    paddingHorizontal: 4,
   },
   text: {
-    color: "#000",
+    color: Colors.black,
   },
   button: {
     fontSize: 20,
     textDecorationLine: "underline",
-    color: "#000",
+    color: Colors.black,
   },
 });

@@ -1,5 +1,6 @@
 import { Stack } from "expo-router";
 import { StatusBar } from "expo-status-bar";
+import { Colors } from "./constants/Colors";
 
 export default function RootLayout() {
   return (
@@ -14,7 +15,11 @@ export default function RootLayout() {
           options={{ title: "About", headerShown: false }}
         />
       </Stack>
-      <StatusBar style="auto" backgroundColor="#C3C3C3" translucent={false} />
+      <StatusBar
+        style="dark"
+        backgroundColor={Colors.light.background}
+        translucent={false}
+      />
     </>
   );
 }
