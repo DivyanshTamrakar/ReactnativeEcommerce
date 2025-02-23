@@ -1,8 +1,18 @@
-import React from 'react';
-import { View, TextInput, StyleSheet } from 'react-native';
-import { Ionicons } from '@expo/vector-icons'; // If using Expo, otherwise use react-native-vector-icons
+import React, { FC } from "react";
+import { View, TextInput, StyleSheet } from "react-native";
+import { Ionicons } from "@expo/vector-icons"; // If using Expo, otherwise use react-native-vector-icons
 
-const SearchBar = ({ value, onChangeText, placeholder = "Search..." }) => {
+type Props = {
+  value: string;
+  onChangeText: () => void;
+  placeholder: string;
+};
+
+const SearchBar: FC<Props> = ({
+  value,
+  onChangeText,
+  placeholder = "Search products...",
+}) => {
   return (
     <View style={styles.container}>
       <Ionicons name="search" size={20} color="black" style={styles.icon} />
@@ -19,12 +29,11 @@ const SearchBar = ({ value, onChangeText, placeholder = "Search..." }) => {
 
 const styles = StyleSheet.create({
   container: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    backgroundColor: '#808080',
+    flexDirection: "row",
+    alignItems: "center",
+    backgroundColor: "#808080", // Gray background
     borderRadius: 25,
     paddingHorizontal: 15,
-    paddingVertical: 10,
     height: 40,
     marginHorizontal: 10,
   },
@@ -34,7 +43,7 @@ const styles = StyleSheet.create({
   input: {
     flex: 1,
     fontSize: 16,
-    color: '#000',
+    color: "black", // Ensure input text appears in red
   },
 });
 
