@@ -1,27 +1,19 @@
 import { useEffect, useState } from "react";
-import {
-  ActivityIndicator,
-  FlatList,
-  SafeAreaView,
-  StyleSheet,
-  View,
-} from "react-native";
+import { SafeAreaView, StyleSheet, Text, View } from "react-native";
 import { ProductItemInterface } from "./commonTypes";
+import ActivityLoader from "./components/activityIndicator";
+import Categories from "./components/Categories/categories";
+import ProductList from "./components/ProductList/productList";
 import SearchBar from "./components/SearchBarComponent";
-import ProductItem from "./components/productItem";
-import useGetAllProducts from "./hooks/getProductsData";
 import { Colors } from "./constants/Colors";
+import useGetAllProducts from "./hooks/getProductsData";
+import NoDataFound from "./components/noDataFound";
 
 export default function Index() {
-  const { allProducts } = useGetAllProducts();
-  const [filteredData, setFilteredProducts] = useState([]);
-  const [searchText, setSearchText] = useState("");
+  const { allProducts, setFilteredProducts, filteredData } =
+    useGetAllProducts();
 
-  useEffect(() => {
-    if (allProducts.length > 0) {
-      setFilteredProducts(allProducts);
-    }
-  }, [allProducts]);
+  const [searchText, setSearchText] = useState<string>("");
 
   const handleChange = (newText: string) => {
     setSearchText(newText);
@@ -32,37 +24,21 @@ export default function Index() {
     setFilteredProducts(filtered);
   };
 
-  const renderItem = ({ item }: { item: ProductItemInterface }) => {
-    return (
-      <ProductItem
-        key={item.id}
-        product={item}
-        onPress={() => {}}
-        id={item.id}
-      />
-    );
-  };
-
   return (
     <SafeAreaView style={styles.container}>
-      {/* <StatusBar backgroundColor="#c3c3c3" barStyle="dark-content" /> */}
-
       <SearchBar value={searchText} onChangeText={handleChange} />
 
+      <Categories
+        allProducts={allProducts}
+        setFilteredProducts={setFilteredProducts}
+      />
+
       {filteredData.length > 0 ? (
-        <FlatList
-          data={filteredData}
-          style={{ marginTop: 10 }}
-          renderItem={renderItem}
-          keyExtractor={(item, index) => index.toString()}
-          numColumns={2} // Ensures two items per row
-          initialNumToRender={10}
-          columnWrapperStyle={{ gap: 10, marginBottom: 10 }} // Row gap
-        />
+        <ProductList allProducts={filteredData} />
+      ) : allProducts.length > 0 ? (
+        <NoDataFound />
       ) : (
-        <ActivityIndicator
-          style={{ flex: 1, justifyContent: "center", alignItems: "center" }}
-        />
+        <ActivityLoader />
       )}
     </SafeAreaView>
   );

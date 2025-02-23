@@ -1,8 +1,8 @@
+import { ProductItemInterface } from "@/app/commonTypes";
+import { Colors } from "@/app/constants/Colors";
 import { Link } from "expo-router";
 import React, { FC } from "react";
 import { Image, StyleSheet, Text, View } from "react-native";
-import { ProductItemInterface } from "../commonTypes";
-import { Colors } from "../constants/Colors";
 
 type Props = {
   product: ProductItemInterface;

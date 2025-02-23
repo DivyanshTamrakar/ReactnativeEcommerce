@@ -1,6 +1,6 @@
 import React, { FC } from "react";
 import { View, TextInput, StyleSheet } from "react-native";
-import { Ionicons } from "@expo/vector-icons"; // If using Expo, otherwise use react-native-vector-icons
+import { Ionicons } from "@expo/vector-icons";
 import { Colors } from "../constants/Colors";
 
 type Props = {
@@ -19,7 +19,7 @@ const SearchBar: FC<Props> = ({
       <Ionicons
         name="search"
         size={20}
-        color={Colors.lightGrey}
+        color={Colors.black}
         style={styles.icon}
       />
       <TextInput
@@ -44,6 +44,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: 15,
     height: 40,
     marginHorizontal: 4,
+    marginTop: 15,
   },
   icon: {
     marginRight: 8,
@@ -51,7 +52,7 @@ const styles = StyleSheet.create({
   input: {
     flex: 1,
     fontSize: 16,
-    color: Colors.lightGrey5, // Ensure input text appears in red
+    color: Colors.lightGrey5,
   },
 });
 

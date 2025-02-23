@@ -10,3 +10,9 @@ export interface ProductItemInterface {
   };
   images: string[];
 }
+
+export interface CategoryInterface {
+  id: number;
+  name: string;
+  image: string;
+}
