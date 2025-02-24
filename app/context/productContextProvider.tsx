@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import ProductsContext from "./productContext";
 import { ProductItemInterface } from "../commonTypes";
-import { ALLPRODUCTURL } from "../constants/apiUrl";
+import { ALLPRODUCTURL } from "@/app/constants/apiUrl";
 
 import { ReactNode } from "react";
 
