@@ -1,24 +1,24 @@
 import { FlatList, StyleSheet, Text, View } from "react-native";
 import { ProductItemInterface } from "../../commonTypes";
 import { Colors } from "../../constants/Colors";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import CategoryItem from "./categoryItem";
 import { removeDuplicateItems } from "./helperFunctions";
+import ProductsContext from "@/app/context/productContext";
 
-const Categories = ({
-  allProducts,
-  setFilteredProducts,
-}: {
-  allProducts: ProductItemInterface[];
-  setFilteredProducts: any;
-}) => {
+const Categories = () => {
   const [touchedId, settouchedId] = useState<number | null>(null);
 
+  const { allProducts, setFilteredProducts } = useContext(ProductsContext);
+
   useEffect(() => {
-    const newArray = allProducts.filter(
-      (item, index) => item.category.id === touchedId
-    );
-    setFilteredProducts(newArray);
+    if (allProducts?.length > 0) {
+      const newArray = allProducts.filter((product: ProductItemInterface) => {
+        return product.category.id === touchedId; // Directly accessing category.id
+      });
+
+      setFilteredProducts(newArray);
+    }
   }, [touchedId]);
 
   return (

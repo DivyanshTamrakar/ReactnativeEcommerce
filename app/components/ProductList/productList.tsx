@@ -1,12 +1,12 @@
 import { ProductItemInterface } from "@/app/commonTypes";
 import { FlatList } from "react-native";
 import ProductItem from "./productItem";
+import { useContext } from "react";
+import ProductsContext from "@/app/context/productContext";
 
-export default function ProductList({
-  allProducts,
-}: {
-  allProducts: ProductItemInterface[];
-}) {
+export default function ProductList() {
+  const { filteredProducts } = useContext(ProductsContext);
+
   const renderItem = ({ item }: { item: ProductItemInterface }) => {
     return (
       <ProductItem
@@ -20,7 +20,7 @@ export default function ProductList({
 
   return (
     <FlatList
-      data={allProducts}
+      data={filteredProducts}
       style={{ marginTop: 10 }}
       renderItem={renderItem}
       keyExtractor={(item, index) => index.toString()}

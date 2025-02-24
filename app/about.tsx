@@ -1,5 +1,5 @@
 import { useLocalSearchParams } from "expo-router";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { ScrollView, StyleSheet, Text, View } from "react-native";
 import { ProductItemInterface } from "./commonTypes";
 import ActivityLoader from "./components/activityIndicator";
@@ -7,6 +7,7 @@ import CarouselSlider from "./components/carousel";
 import PriceAddButton from "./components/priceButton";
 import { ALLPRODUCTURL } from "./constants/apiUrl";
 import { Colors } from "./constants/Colors";
+import ProductsContext from "./context/productContext";
 
 export default function AboutScreen() {
   const params = useLocalSearchParams();

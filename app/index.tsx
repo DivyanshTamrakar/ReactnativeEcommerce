@@ -1,39 +1,27 @@
-import { useEffect, useState } from "react";
-import { SafeAreaView, StyleSheet, Text, View } from "react-native";
-import { ProductItemInterface } from "./commonTypes";
+import React, { useContext } from "react";
+import { SafeAreaView, StyleSheet } from "react-native";
 import ActivityLoader from "./components/activityIndicator";
 import Categories from "./components/Categories/categories";
+import NoDataFound from "./components/noDataFound";
 import ProductList from "./components/ProductList/productList";
 import SearchBar from "./components/SearchBarComponent";
 import { Colors } from "./constants/Colors";
-import useGetAllProducts from "./hooks/getProductsData";
-import NoDataFound from "./components/noDataFound";
+import ProductsContext from "./context/productContext";
+import { useProductSearch } from "./hooks/useProductSearch";
 
 export default function Index() {
-  const {
-    allProducts,
-    setFilteredProducts,
-    filteredData,
-    setSearchText,
-    searchText,
-  } = useGetAllProducts();
-
-  const handleChange = (newText: string) => {
-    setSearchText(newText);
-  };
+  const { allProducts, filteredProducts } = useContext(ProductsContext);
+  const { searchText, setSearchText } = useProductSearch();
 
   return (
     <SafeAreaView style={styles.container}>
-      <SearchBar value={searchText} onChangeText={handleChange} />
+      <SearchBar value={searchText} onChangeText={setSearchText} />
 
-      <Categories
-        allProducts={allProducts}
-        setFilteredProducts={setFilteredProducts}
-      />
+      <Categories />
 
-      {filteredData.length > 0 ? (
-        <ProductList allProducts={filteredData} />
-      ) : allProducts.length > 0 ? (
+      {filteredProducts?.length > 0 ? (
+        <ProductList />
+      ) : allProducts?.length > 0 ? (
         <NoDataFound />
       ) : (
         <ActivityLoader />
