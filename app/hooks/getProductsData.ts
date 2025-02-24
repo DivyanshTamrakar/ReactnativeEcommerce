@@ -7,6 +7,8 @@ export default function useGetAllProducts() {
   const [filteredData, setFilteredProducts] = useState<ProductItemInterface[]>(
     []
   );
+  const [searchText, setSearchText] = useState<string>("");
+  const [debouncedSearch, setDebouncedSearch] = useState<string>("");
 
   useEffect(() => {
     const fetchData = async () => {
@@ -31,5 +33,32 @@ export default function useGetAllProducts() {
     }
   }, [allProducts]);
 
-  return { allProducts, setAllProducts, filteredData, setFilteredProducts };
+  useEffect(() => {
+    const handler = setTimeout(() => {
+      setDebouncedSearch(searchText);
+    }, 300); // Adjust delay as needed
+
+    return () => clearTimeout(handler); // Cleanup on each keystroke
+  }, [searchText]);
+
+  // Effect to filter data when debouncedSearch changes
+  useEffect(() => {
+    if (debouncedSearch) {
+      const filtered = allProducts.filter((product) =>
+        product.title.toLowerCase().includes(debouncedSearch.toLowerCase())
+      );
+      setFilteredProducts(filtered);
+    } else {
+      setFilteredProducts(allProducts); // Reset to all products if search is empty
+    }
+  }, [debouncedSearch, allProducts]);
+
+  return {
+    allProducts,
+    setAllProducts,
+    filteredData,
+    setFilteredProducts,
+    setSearchText,
+    searchText,
+  };
 }

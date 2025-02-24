@@ -10,18 +10,16 @@ import useGetAllProducts from "./hooks/getProductsData";
 import NoDataFound from "./components/noDataFound";
 
 export default function Index() {
-  const { allProducts, setFilteredProducts, filteredData } =
-    useGetAllProducts();
-
-  const [searchText, setSearchText] = useState<string>("");
+  const {
+    allProducts,
+    setFilteredProducts,
+    filteredData,
+    setSearchText,
+    searchText,
+  } = useGetAllProducts();
 
   const handleChange = (newText: string) => {
     setSearchText(newText);
-    const filtered = allProducts.filter((product) =>
-      product.title.toLowerCase().includes(newText.toLowerCase())
-    );
-
-    setFilteredProducts(filtered);
   };
 
   return (
