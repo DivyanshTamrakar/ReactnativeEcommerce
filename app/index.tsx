@@ -1,31 +1,12 @@
-import React, { useContext } from "react";
-import { SafeAreaView, StyleSheet } from "react-native";
-import ActivityLoader from "./components/activityIndicator";
-import Categories from "./components/Categories/categories";
-import NoDataFound from "./components/noDataFound";
-import ProductList from "./components/ProductList/productList";
-import SearchBar from "./components/SearchBarComponent";
+import React from "react";
+import { SafeAreaView, StyleSheet, View } from "react-native";
+import SignInScreen from "./signIn";
 import { Colors } from "./constants/Colors";
-import ProductsContext from "./context/productContext";
-import { useProductSearch } from "./hooks/useProductSearch";
 
 export default function Index() {
-  const { allProducts, filteredProducts } = useContext(ProductsContext);
-  const { searchText, setSearchText } = useProductSearch();
-
   return (
     <SafeAreaView style={styles.container}>
-      <SearchBar value={searchText} onChangeText={setSearchText} />
-
-      <Categories />
-
-      {filteredProducts?.length > 0 ? (
-        <ProductList />
-      ) : allProducts?.length > 0 ? (
-        <NoDataFound />
-      ) : (
-        <ActivityLoader />
-      )}
+      <SignInScreen />
     </SafeAreaView>
   );
 }
@@ -35,13 +16,5 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: Colors.white,
     paddingHorizontal: 4,
-  },
-  text: {
-    color: Colors.black,
-  },
-  button: {
-    fontSize: 20,
-    textDecorationLine: "underline",
-    color: Colors.black,
   },
 });

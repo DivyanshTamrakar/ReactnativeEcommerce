@@ -1,8 +1,8 @@
 import { ProductItemInterface } from "@/app/commonTypes";
+import ProductsContext from "@/app/context/productContext";
+import { useContext } from "react";
 import { FlatList } from "react-native";
 import ProductItem from "./productItem";
-import { useContext } from "react";
-import ProductsContext from "@/app/context/productContext";
 
 export default function ProductList() {
   const { filteredProducts } = useContext(ProductsContext);
