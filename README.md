@@ -2,6 +2,8 @@
 
 A modern **ECommerce App** built with **React Native**, featuring **OAuth login**, **product search & filtering**, and a **beautiful UI**. This app is powered by the **Platzi FakeAPI** to simulate a real-world shopping experience.
 
+![app-demoGIF](https://github.com/user-attachments/assets/ff0696f8-1802-43ef-98c3-20ddb25c1347)
+
 ---
 
 ## ✨ Features
@@ -32,3 +34,7 @@ A modern **ECommerce App** built with **React Native**, featuring **OAuth login*
 git clone https://github.com/yourusername/react-native-ecommerce.git
 and then run 
 npm run start
+
+
+
+
